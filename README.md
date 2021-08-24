@@ -27,3 +27,79 @@ Kubernetes should be used to group together a collection of containers (can be d
 </p>
 
 [Kubernetes Use Cases [Resource]](https://codilime.com/blog/harnessing-the-power-of-kubernetes-7-use-cases)
+
+## When not to use Kubernetes
+
+**Kubernetes can be overkill for simple apps**
+
+If you are building a simple application that wont be distributed to a large audience or allocating lots of resources you do not need K8. This is because its a complex technolgoy that is meant to run software in cloud environemtn at a massive scale. 
+
+## Competitors
+
+- Amazon Elastic Container Service (Amazon ECS)
+- Mirantis Kubernetes Engine (formerly Docker Enterprise)
+- G2 Deals
+- Google Kubernetes Engine (GKE)
+- Red Hat OpenShift Container Platform
+- Azure Kubernetes Service (AKS)
+- SaltStack
+- Rancher
+- Portainer
+- Amazon Elastic Kubernetes Service (Amazon EKS)
+- Cloud Foundry
+
+### App Deploy
+
+```YML
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+
+spec:
+  selector:
+    matchLabels:
+      app: nodejs
+  replicas: 2
+  template: 
+    metadata:
+      labels:
+        app: nodejs
+    spec:
+      containers:
+        - name: k8-app
+          image: mueed/eng89_app:v3
+          ports:
+          - containerPort: 3000
+```
+### App Service
+```YML
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-deployment
+  namespace: default
+  resourceVersion: "40883"
+  uid: 9190ab75-d61c-4ff4-a3d1-0d293fa8d72e
+spec:
+  # clusterIP: 10.96.0.1
+  # clusterIPs:
+  # - 10.96.0.1
+  # externalTrafficPolicy: Cluster
+  # ipFamilies:
+  # - IPv4
+  # ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 30442
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nginx
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - hostname: localhost
+```

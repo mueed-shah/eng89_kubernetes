@@ -1,0 +1,18 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+
+metadata:
+  name: node-app-hpa
+  namespace: default
+
+# set your auto-scaling min and max numbers
+spec:
+  maxReplicas: 9
+  minReplicas: 2
+  # target your node-app-deployment so the hpa knows which
+  # deployment to scale up on demand, scales down when no longer needed
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: node-app
+  targetCPUUtilizationPercentage: 50
