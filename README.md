@@ -272,7 +272,7 @@ Use cases :
 
 `# kubectl get job --watch`
 
-`# pods=$(kubectl get pods --selector=job-name=eng89-27163577  --output=jsonpath={.items[*].metadata.name})`
+`# pods=$(kubectl get pods --selector=job-name=eng89-27163577  --output=jsonpath={.items[*].metadata name})`
 
 ![diagram](diagram.png)
 
@@ -282,3 +282,5 @@ Use cases :
 - ExternalName. Maps a service to a predefined externalName field by returning a value for the CNAME record.
 
 **NodePort port range** - 30000-32767
+
+![diagarm](pods.png)
